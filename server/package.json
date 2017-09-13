@@ -1,0 +1,17 @@
+{
+  "name": "college-infographic",
+  "version": "1.0.0",
+  "description": "A college infographic project",
+  "main": "app.js",
+  "scripts": {
+    "test": "test",
+    "start": "node app.js"
+  },
+  "author": "Thomas Taylor",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^8.0.26",
+    "google-auth-library": "^0.11.0",
+    "googleapis": "^21.3.0"
+  }
+}
