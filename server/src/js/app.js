@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
-var google = require('googleapis');
-var GoogleAuth = require('google-auth-library');
-var authFactory = new GoogleAuth();
-var dns = google.dns('v1');
+// var google = require('googleapis');
+// var GoogleAuth = require('google-auth-library');
+// var authFactory = new GoogleAuth();
+// var dns = google.dns('v1');
 const app = express();
 // Set variables for app
 app.set("port", process.env.PORT || 3000);
