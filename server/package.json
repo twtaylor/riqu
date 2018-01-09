@@ -4,11 +4,9 @@
   "description": "A college infographic project server",
   "main": "app.js",
   "scripts": {
-    "test": "test",
-    "start": "node src/js/app.js",
-    "build": "npm run build-ts",
-    "build-ts": "tsc",
-    "serve": "nodemon src/js/app.js"
+    "dev": "NODE_ENV=development nodemon ./bin/www",
+    "grunt": "grunt",
+    "start": "node ./bin/www"
   },
   "author": "Thomas Taylor",
   "license": "ISC",
