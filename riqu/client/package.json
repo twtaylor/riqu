@@ -1,0 +1,17 @@
+{
+  "name": "college-infographic-server",
+  "version": "1.0.0",
+  "description": "A college infographic project client side frameworks",
+  "main": "src/js/app.js",
+  "scripts": {
+    "start": "node src/js/app.js"
+  },
+  "author": "Thomas Taylor",
+  "license": "ISC",
+  "dependencies": {
+    "@types/gulp": "^4.0.4",
+    "@types/node": "^8.0.26",
+    "@types/webpack": "^3.0.10",
+    "@types/webpack-stream": "^3.2.7"
+  }
+}

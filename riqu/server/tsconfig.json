@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "allowJs": true, 
+    "noImplicitAny": false,
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "noEmitOnError": true,
+    "removeComments": false,
+    "sourceMap": false,
+    "outDir": "./src/js", 
+    "target": "es6",
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+          "node_modules/*",
+          "src/ts/*"
+      ]
+    }
+  },
+  "include": [
+    "src/ts/**/*"
+  ]
+}
