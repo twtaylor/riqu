@@ -61,3 +61,7 @@ typings/
 # vagrant 
 .vagrant
 
+# app specific
+/riqu/server/dist
+/riqu/server/.tscache
+

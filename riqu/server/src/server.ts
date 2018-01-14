@@ -25,6 +25,11 @@ import { IHdModel } from "./orm/models/hd"; //import IUserModel
 // schemas
 import { hdSchema } from "./orm/schemas/hd"; //import userSchema
 
+/**
+ * The server.
+ *
+ * @class Server
+ */
 export class Server {
 
     public app: express.Application;
@@ -51,7 +56,7 @@ export class Server {
      */
     constructor() {
       //instance defaults
-      this.model = new Object(); //initialize this to an empty object
+      this.model = Object(); //initialize this to an empty object
   
       //create expressjs application
       this.app = express();
@@ -65,6 +70,35 @@ export class Server {
       //add api
       this.api();
     }
+
+    /**
+     * Create REST API routes
+     *
+     * @class Server
+     * @method api
+     */
+    public api() {
+        //empty for now
+    }
+
+    /**
+     * Create and return Router.
+     *
+     * @class Server
+     * @method config
+     * @return void
+     */
+    private routes() {
+        let router: express.Router;
+        router = express.Router();
+
+        //IndexRoute
+        IndexRoute.create(router);
+
+        //use router middleware
+        this.app.use(router);
+    }
+
   
     /**
      * Configure application
