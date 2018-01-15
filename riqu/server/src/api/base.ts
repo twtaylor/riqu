@@ -18,9 +18,9 @@ export class BaseApiRoute  {
      * @param body {any} Item for the JSON object
      * @return void
      */
-    public renderJson(req: Request, res: Response, url: string, body?: any) {
+    public renderJson(req: Request, res: Response, body?: any) {
       //add constants
-      res.locals.BASE_URL = "/api" + url;
+      //res.locals.BASE_URL = "/api";
 
       // send our json request
       res.json(body);

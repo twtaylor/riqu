@@ -150,7 +150,7 @@ export class Server {
       let connection: mongoose.Connection = mongoose.createConnection(MONGODB_CONNECTION);
   
       //create models
-      this.model.hd = connection.model<IHdModel>("Hd", hdSchema);
+      this.model.hd = connection.model<IHdModel>("hd", hdSchema, "hd2016");
   
       // catch 404 and forward to error handler
       this.app.use(function(err: any, req: express.Request, res: express.Response, next: express.NextFunction) {

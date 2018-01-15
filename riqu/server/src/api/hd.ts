@@ -16,24 +16,26 @@ export class HdRoute extends BaseApiRoute {
      * Create the routes.
      *
      * @class HdRoute
-     * @method create
+     * @method create 
      * @static
      */
     public static create(router: Router, model: IModel) {
       //log
-      console.log("[IndexRoute::create] Creating hd route.");
+      console.log("[HdRoute::create] Creating hds route.");
 
-      let hdRoute = new HdRoute(model);
-  
+      var hdRoute = new HdRoute(model);
+
       //add all hds route
       router.get("/api/hds", (req: Request, res: Response, next: NextFunction) => {
         hdRoute.renderAllHds(req, res, next);
       });
 
-      //add hds route
-      router.get("/api/hd:hdId", (req: Request, res: Response, next: NextFunction) => {
-        hdRoute.renderHd(req, res, next);
-      });
+      console.log("[HdRoute::create] Creating hd by query route.");
+
+      // hds by state route
+      router.get("/api/hd", (req: Request, res: Response, next: NextFunction) => {
+        hdRoute.renderHdByQuery(req, res, next);
+      }); 
     }
   
     /**
@@ -52,42 +54,62 @@ export class HdRoute extends BaseApiRoute {
      * All hds api route
      *
      * @class HdRoute
-     * @method index
+     * @method renderAllHds
      * @param req {Request} The express Request object.
      * @param res {Response} The express Response object.
      * @next {NextFunction} Execute the next method.
      */
     public renderAllHds(req: Request, res: Response, next: NextFunction) {
-      // retrieve all hds from our repository
-      this.model.hd.find(function(err: any, res:IHdModel[]){
-          // render returned objects
-          let body:any = 'error detected';
+      var that = this;
 
-          if (!err) {
-            body = res;
-          }
-
-          // render out our json
-          this.renderJson(req, res, body);
-      }); 
-  
-      
+      this.renderModelWithParams(req, res, next, {}, 'Error in fetching all Hds');
     }
 
     /**
-     * All hds api route
+     * Hds by query route
      *
      * @class HdRoute
-     * @method index
+     * @method renderHdByQuery
      * @param req {Request} The express Request object.
      * @param res {Response} The express Response object.
      * @next {NextFunction} Execute the next method.
      */
-    public renderHd(req: Request, res: Response, next: NextFunction) {
-        // retrieve all hds from our repository
-        
-    
-        //render template
-        // this.renderJson(req, res, "index", options);
+    public renderHdByQuery(req: Request, res: Response, next: NextFunction) {
+      var that = this;
+      var stateCode:String = '';
+
+      // process our state from the request
+      if (req.query.state) {
+        stateCode = String(req.query.state);
+      }
+
+      
+
+      this.renderModelWithParams(req, res, next, { 'STABBR': stateCode }, 'Error in fetching state hds');
+    }
+
+    /**
+     * This is a helper function to help with the render of certain find params
+     *
+     * @class HdRoute
+     * @method renderModelWithParams
+     * @param req {Request} The express Request object.
+     * @param res {Response} The express Response object.
+     * @next {NextFunction} Execute the next method.
+     */
+    private renderModelWithParams(req: Request, res: Response, next: NextFunction, findParams: any, errorMessage: String) {
+      // retrieve all hds from our repository
+      this.model.hd.find(findParams, (err: any, model:IHdModel[]) => {
+          // render returned objects
+          if (!err) {
+            let body:IHdModel[] = model; 
+
+            // render out our json
+            this.renderJson(req, res, body);
+          }
+          else {
+            console.error(errorMessage, err);
+          }
+      }); 
       }
   }
