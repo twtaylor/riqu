@@ -10,8 +10,6 @@ import { IHdModel } from '../orm/models/hd';
  */
 export class HdRoute extends BaseApiRoute {
 
-  protected model: IModel;
-
     /**
      * Create the routes.
      *
@@ -44,10 +42,8 @@ export class HdRoute extends BaseApiRoute {
      * @class HdRoute
      * @constructor
      */
-    constructor(model: IModel) {
-      super();
-
-      this.model = model;
+    constructor(model:IModel) {
+      super(model);
     }
   
     /**
@@ -62,7 +58,7 @@ export class HdRoute extends BaseApiRoute {
     public renderAllHds(req: Request, res: Response, next: NextFunction) {
       var that = this;
 
-      this.renderModelWithParams(req, res, next, {}, 'Error in fetching all Hds');
+      this.renderModelWithParams<IHdModel>(req, res, next, {}, 'Error in fetching all Hds');
     }
 
     /**
@@ -83,33 +79,6 @@ export class HdRoute extends BaseApiRoute {
         stateCode = String(req.query.state);
       }
 
-      
-
-      this.renderModelWithParams(req, res, next, { 'STABBR': stateCode }, 'Error in fetching state hds');
+      this.renderModelWithParams<IHdModel>(req, res, next, { 'STABBR': stateCode }, 'Error in fetching state hds');
     }
-
-    /**
-     * This is a helper function to help with the render of certain find params
-     *
-     * @class HdRoute
-     * @method renderModelWithParams
-     * @param req {Request} The express Request object.
-     * @param res {Response} The express Response object.
-     * @next {NextFunction} Execute the next method.
-     */
-    private renderModelWithParams(req: Request, res: Response, next: NextFunction, findParams: any, errorMessage: String) {
-      // retrieve all hds from our repository
-      this.model.hd.find(findParams, (err: any, model:IHdModel[]) => {
-          // render returned objects
-          if (!err) {
-            let body:IHdModel[] = model; 
-
-            // render out our json
-            this.renderJson(req, res, body);
-          }
-          else {
-            console.error(errorMessage, err);
-          }
-      }); 
-      }
-  }
+}

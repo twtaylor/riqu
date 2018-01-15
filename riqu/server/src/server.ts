@@ -15,16 +15,16 @@ import mongoose = require("mongoose");
 // routes
 import { IndexRoute } from './routes/index';
 import { HdRoute } from './api/hd';
-
-//interfaces
-import { IHd } from "./orm/interfaces/hd"; //import IUser
+import { IcRoute } from './api/ic';
 
 //models
 import { IModel } from "./orm/models"; //import IModel
-import { IHdModel } from "./orm/models/hd"; //import IUserModel
+import { IHdModel } from "./orm/models/hd"; 
+import { IIcModel } from "./orm/models/ic"; 
 
 // schemas
-import { hdSchema } from "./orm/schemas/hd"; //import userSchema
+import { hdSchema } from "./orm/schemas/hd"; 
+import { icSchema } from "./orm/schemas/ic"; 
 
 /**
  * The server.
@@ -84,6 +84,7 @@ export class Server {
 
          // ApiRoutes
          HdRoute.create(router, this.model);
+         IcRoute.create(router, this.model);
 
         //use router middleware
         this.app.use(router);
@@ -102,7 +103,6 @@ export class Server {
 
         //IndexRoute
         IndexRoute.create(router);
-
        
         //use router middleware
         this.app.use(router);
@@ -116,19 +116,20 @@ export class Server {
      * @method config
      */
     public config() {
+      // TODO: put in a file at some pt
       const MONGODB_CONNECTION: string = "mongodb://localhost:27017/riqu";
   
       //add static paths
       this.app.use(express.static(path.join(__dirname, "public")));
   
-      //configure pug
+      // configure pug
       this.app.set("views", path.join(__dirname, "views"));
       this.app.set("view engine", "pug");
   
-      //mount logger
+      // mount logger
       this.app.use(logger("dev"));
   
-      //mount json form parser
+      // mount json form parser
       this.app.use(bodyParser.json());
   
       //mount query string parser
@@ -151,6 +152,7 @@ export class Server {
   
       //create models
       this.model.hd = connection.model<IHdModel>("hd", hdSchema, "hd2016");
+      this.model.ic = connection.model<IIcModel>("ic", hdSchema, "ic2016_ay");
   
       // catch 404 and forward to error handler
       this.app.use(function(err: any, req: express.Request, res: express.Response, next: express.NextFunction) {
