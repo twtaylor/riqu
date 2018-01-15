@@ -13,7 +13,7 @@ module.exports = function(grunt) {
             },
             {
               expand: true,
-              cwd: "./src/ts/views",
+              cwd: "./src/views",
               src: ["**"],
               dest: "./dist/views"
             }

@@ -14,6 +14,7 @@ import mongoose = require("mongoose");
 
 // routes
 import { IndexRoute } from './routes/index';
+import { HdRoute } from './api/hd';
 
 //interfaces
 import { IHd } from "./orm/interfaces/hd"; //import IUser
@@ -78,7 +79,14 @@ export class Server {
      * @method api
      */
     public api() {
-        //empty for now
+        let router: express.Router;
+        router = express.Router();
+
+         // ApiRoutes
+         HdRoute.create(router, this.model);
+
+        //use router middleware
+        this.app.use(router);
     }
 
     /**
@@ -95,6 +103,7 @@ export class Server {
         //IndexRoute
         IndexRoute.create(router);
 
+       
         //use router middleware
         this.app.use(router);
     }
