@@ -7,10 +7,13 @@ import * as express from "express";
 import * as logger from "morgan";
 import * as path from "path";
 
-// require
+// require - we don't don't have TS for this
 import errorHandler = require("errorhandler");
 import methodOverride = require("method-override");
 import mongoose = require("mongoose"); 
+
+import graphqlHTTP = require('express-graphql');
+import { buildSchema } from 'graphql';
 
 // routes
 import { IndexRoute } from './routes/index';
@@ -116,11 +119,11 @@ export class Server {
      * @method config
      */
     public config() {
-      // TODO: put in a file at some pt
+      // TODO: put in a config file at some pt
       const MONGODB_CONNECTION: string = "mongodb://localhost:27017/riqu";
   
-      //add static paths
-      this.app.use(express.static(path.join(__dirname, "public")));
+      // add static paths
+      this.app.use(express.static(path.join(__dirname, '..', "public")));
 
       // configure pug
       this.app.set("views", path.join(__dirname, "views"));

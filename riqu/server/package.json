@@ -1,6 +1,6 @@
 {
   "name": "riqu-server",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "RIQU's project server",
   "main": "server.js",
   "scripts": {
@@ -21,6 +21,9 @@
     "@types/morgan": "^1.7.35",
     "@types/passport-facebook": "^2.1.6",
     "@types/passport-google-oauth2": "^0.1.1",
+    "express-graphql": "^0.6.12",
+    "graphql": "^0.13.2",
+    "grunt-contrib-clean": "^1.1.0",
     "typescript": "^2.6.2"
   },
   "dependencies": {

@@ -64,4 +64,4 @@ typings/
 # app specific
 /riqu/server/dist
 /riqu/server/.tscache
-
+/braintree

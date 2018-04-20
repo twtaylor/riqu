@@ -8,9 +8,16 @@
 Vagrant.configure("2") do |config|
 
   config.vm.box = "ubuntu/trusty64"
+ 
 
+  # old static config
+  # config.vm.network :private_network, ip: "192.168.68.8"
+  # config.vm.network :private_network, type: "dhcp"
 
-  config.vm.network :private_network, ip: "192.168.68.8"
+  #config.vm.provider :virtualbox do |vb|
+    #vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    #vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+  #end
 
   # Forward mongo ports 
   config.vm.network :forwarded_port, guest: 27017, host: 27017
@@ -30,10 +37,12 @@ Vagrant.configure("2") do |config|
     # Using Ubuntu
     curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
     sudo apt-get install -y nodejs
-    sudo apt-get install mongodb   
+    sudo apt-get install -y mongodb   
 	
-	# probably add grunt-cli, nodemon to this they need to be global
-	sudo npm install grunt-cli -g 
-	sudo npm install nodemon -g 
+	  # probably add grunt-cli, nodemon to this they need to be global
+	  sudo npm install grunt-cli -g 
+	  sudo npm install nodemon -g 
+
+    sudo npm install -g @angular/cli
   SHELL
 end
