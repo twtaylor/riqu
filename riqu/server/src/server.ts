@@ -123,7 +123,7 @@ export class Server {
       const MONGODB_CONNECTION: string = "mongodb://localhost:27017/riqu";
   
       // add static paths
-      this.app.use(express.static(path.join(__dirname, '..', "public")));
+      this.app.use(express.static(path.join(__dirname, '..', '..', "wwwroot")));
 
       // configure pug
       this.app.set("views", path.join(__dirname, "views"));

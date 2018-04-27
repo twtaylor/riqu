@@ -38,11 +38,13 @@ Vagrant.configure("2") do |config|
     curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
     sudo apt-get install -y nodejs
     sudo apt-get install -y mongodb   
+    sudo apt-get install -y git
 	
 	  # probably add grunt-cli, nodemon to this they need to be global
 	  sudo npm install grunt-cli -g 
 	  sudo npm install nodemon -g 
 
     sudo npm install -g @angular/cli
+    
   SHELL
 end

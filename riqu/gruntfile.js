@@ -11,14 +11,14 @@ module.exports = function(grunt) {
               cwd: "./public",
               src: ["**"],
               dest: "./wwwroot"
-            },
-            // source JS files, these come out of /client dir
-            {
-              expand: true,
-              cwd: "./client/dist",
-              src: ["**"],
-              dest: "./wwwroot/js"
             }
+            // source JS files, these come out of /client dir
+            // ,{
+            //   expand: true,
+            //   cwd: "./client/dist",
+            //   src: ["**"],
+            //   dest: "./wwwroot/js"
+            // }
           ]
         }
       },
