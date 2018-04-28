@@ -15,6 +15,10 @@ import mongoose = require("mongoose");
 import graphqlHTTP = require('express-graphql');
 import { buildSchema } from 'graphql';
 
+// APPLICATION
+
+import graphqlSchema from './graphql/dbSchema';
+
 // routes
 import { IndexRoute } from './routes/index';
 import { HdRoute } from './api/hd';
@@ -61,17 +65,9 @@ export class Server {
     constructor() {
       //instance defaults
       this.model = Object(); //initialize this to an empty object
-  
-      //create expressjs application
       this.app = express();
-  
-      //configure application
       this.config();
-  
-      //add routes
       this.routes();
-  
-      //add api
       this.api();
     }
 
@@ -86,8 +82,8 @@ export class Server {
         router = express.Router();
 
          // ApiRoutes
-         HdRoute.create(router, this.model);
-         IcRoute.create(router, this.model);
+        //  HdRoute.create(router, this.model);
+        //  IcRoute.create(router, this.model);
 
         //use router middleware
         this.app.use(router);
@@ -119,12 +115,10 @@ export class Server {
      * @method config
      */
     public config() {
-      // TODO: put in a config file at some pt
-      const MONGODB_CONNECTION: string = "mongodb://localhost:27017/riqu";
-  
       // add static paths
       this.app.use(express.static(path.join(__dirname, '..', '..', "wwwroot")));
 
+      // TODO: get rid of views
       // configure pug
       this.app.set("views", path.join(__dirname, "views"));
       this.app.set("view engine", "pug");
@@ -135,27 +129,37 @@ export class Server {
       // mount json form parser
       this.app.use(bodyParser.json());
   
-      //mount query string parser
+      // mount query string parser
       this.app.use(bodyParser.urlencoded({
         extended: true
       }));
   
-      // mount cookie parker
+      // TODO change - mount cookie parker
       this.app.use(cookieParser("SECRET_GOES_HERE"));
   
       // mount override
       this.app.use(methodOverride());
+
+      // GRAPH QL SPECIFIC
+      // GraphQL schema
+      let schema = graphqlSchema; 
+
+      // Root resolver
+      this.app.use('/graphql', graphqlHTTP({ 
+        schema: schema, 
+        graphiql: true
+      }));
   
-      //use q promises
+      // use q promises
       global.Promise = require("q").Promise;
       mongoose.Promise = global.Promise;
   
-      //connect to mongoose
-      let connection: mongoose.Connection = mongoose.createConnection(MONGODB_CONNECTION);
+      // connect to mongoose
+      // let connection: mongoose.Connection = mongoose.createConnection(MONGODB_CONNECTION);
   
-      //create models
-      this.model.hd = connection.model<IHdModel>("hd", hdSchema, "hd2016");
-      this.model.ic = connection.model<IIcModel>("ic", hdSchema, "ic2016_ay");
+      // create models
+      // this.model.hd = connection.model<IHdModel>("hd", hdSchema, "hd2016");
+      // this.model.ic = connection.model<IIcModel>("ic", hdSchema, "ic2016_ay");
   
       // catch 404 and forward to error handler
       this.app.use(function(err: any, req: express.Request, res: express.Response, next: express.NextFunction) {

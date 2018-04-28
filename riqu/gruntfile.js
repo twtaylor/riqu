@@ -30,19 +30,25 @@ module.exports = function(grunt) {
       ts: {
         // server build process
         server: {
-          files: [{
-            src: ["./server/src/\*\*/\*.ts", "!./server/src/.baseDir.ts"],
-            dest: "./server/dist"
-          }],
-          options: {
-            module: "commonjs",
-            target: "es6",
-            sourceMap: false,
-            rootDir: "./server/src"
+          // files: [{
+          //   src: ["./server/src/\*\*/\*.ts", "!./server/src/.baseDir.ts"],
+          //   dest: "./server/dist"
+          // }],
+          // options: {
+          //   module: "commonjs",
+          //   target: "es6",
+          //   sourceMap: false,
+          //   rootDir: "./server/src"
+          // },
+          // with passthrough = true, we just use the tsconfig.json in that folder
+          tsconfig: {
+            tsconfig: './server/tsconfig.json', 
+            ignoreFiles: true,
+            passThrough: true
           }
         },
         // client build process
-        client: {
+        client: { 
           files: [{
             src: ["./client/src/\*\*/\*.ts", "!./client/src/.baseDir.ts"],
             dest: "./client/dist"
