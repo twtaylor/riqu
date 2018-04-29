@@ -1,15 +1,44 @@
-import { Schema } from "mongoose";
+import * as Mongoose from "mongoose";
 
-export var hdSchema: Schema = new Schema({
-    UNITID: Number,
-    InstitutionName: String,
-    Address: String,
-    City: String,
-    State: String,
-    Zip: String,
-    Latitude: Number,
-    Longitude: Number, 
-    CreatedAt: Date
+export var hdSchema: Mongoose.Schema = new Mongoose.Schema({
+    UNITID: Mongoose.Schema.Types.Number,
+    INSTNM: {
+      type: Mongoose.Schema.Types.String, 
+      alias: 'InstitutionName'
+    },
+    IALIAS: {
+      type: Mongoose.Schema.Types.String,
+      alias: 'InstAlias'
+    }, 
+    ADDR: { 
+      type: Mongoose.Schema.Types.String,
+      alias: 'Address'
+    },
+    CITY: {
+      type: Mongoose.Schema.Types.String,
+      alias: "City"
+    }, 
+    STABBR: { 
+      type: Mongoose.Schema.Types.String, 
+      alias: 'State'
+    }, 
+    ZIP: { 
+      type: Mongoose.Schema.Types.String,
+      alias: 'Zip'
+    },
+    LATITUDE: { 
+      type: Mongoose.Schema.Types.String,
+      alias: 'Latitude'
+    },
+    LONGITUD: { 
+      type: Mongoose.Schema.Types.String,
+      alias: 'Longitude'
+    }, 
+    WebAddr: {
+      type: Mongoose.Schema.Types.String,
+      alias: 'WebAddress'
+    },
+    CreatedAt: Mongoose.Schema.Types.Date
 })
 
 hdSchema.pre("save", function(next) {
@@ -17,4 +46,4 @@ hdSchema.pre("save", function(next) {
     this.CreatedAt = new Date();
   }
   next();
-});
+}); 

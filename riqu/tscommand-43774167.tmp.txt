@@ -1,0 +1,1 @@
+--project ./server/tsconfig.json
