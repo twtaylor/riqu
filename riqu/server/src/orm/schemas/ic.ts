@@ -15,8 +15,6 @@ for (let [key, item] of mappingSet) {
   }
 }
 
-console.log(preSchema) 
-
 var icSchema = new Mongoose.Schema(preSchema);
 
 icSchema.pre("save", function(next) { 
