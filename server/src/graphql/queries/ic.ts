@@ -20,7 +20,7 @@ export default {
             first = args.first;
         }
 
-        console.log('args', args)
+        console.log('args', args);
 
         let query = Ic.find();
 

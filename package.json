@@ -4,7 +4,8 @@
   "description": "RIQU's grunt project",
   "scripts": {
     "grunt": "grunt",
-    "full-build": "cd src/ && npm install && cd ../server && npm install && cd .. && npm install"
+    "full-build": "cd src/ && npm install && cd ../server && npm install && cd .. && npm install",
+    "start": 
   },
   "author": "Thomas Taylor",
   "license": "ISC",
