@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "RIQU's grunt project",
   "scripts": {
-    "grunt": "grunt"
+    "grunt": "grunt",
+    "full-build": "cd src/ && npm install && cd ../server && npm install && cd .. && npm install"
   },
   "author": "Thomas Taylor",
   "license": "ISC",
